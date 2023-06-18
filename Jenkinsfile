@@ -45,7 +45,7 @@ pipeline {
           stage('Build') {
             
             steps {
-               lock( label: 'synchronous-build' )
+               lock(resource: 'synchronous-build', inversePrecedence: true)
               {
                 dir("$project") {
                   bat "dotnet build --configuration Release"
