@@ -16,17 +16,17 @@ pipeline {
       matrix {
         axes {
           axis {
-            name 'service'
+            name 'project'
             values 'ConsoleApp1', 'ConsoleApp2'
           }
         }
         when {
-          changeset pattern: "*/$service/*"
+          changeset pattern: "$project/**"
         }
         stages {
           stage('Restore PACKAGES') {
             steps {
-              dir("$service") {
+              dir("$project") {
                 bat "dotnet restore"
               }
             }
@@ -34,14 +34,14 @@ pipeline {
           }
           stage('Clean') {
             steps {
-              dir("$service") {
+              dir("$project") {
                 bat "dotnet clean"
               }
             }
           }
           stage('Build') {
             steps {
-              dir("$service") {
+              dir("$project") {
                 bat "dotnet build --configuration Release"
               }
             }
