@@ -9,7 +9,7 @@ pipeline {
  stages {
   stage('Checkout') {
    steps {
-   echo "Selection was ${SELECTION}"
+   echo "Selection was ${PROEJCT}"
     git url: 'https://github.com/Panther59/MonoRepoTrial.git', branch: 'master'
    }
   }
