@@ -1,8 +1,5 @@
 pipeline {
  agent { label 'buildagent' }
- parameters { 
-       choice(name: 'PROEJCT', choices: ['ConsoleApp1', 'ConsoleApp2'], description: 'Select project to build') 
- }
  environment {
   dotnet = 'C:\\Program Files\\dotnet\\dotnet.exe'
  }
@@ -14,24 +11,22 @@ pipeline {
    }
   }
   stage('Restore PACKAGES') {
-   steps {
-    dir("${PROEJCT}") {
-     bat "dotnet restore"
-    }
-   }
+   when { changeset "**/ConsoleApp1/*.*" }
+   steps { dir("ConsoleApp1") {bat "dotnet restore"  } }
+   when { changeset "**/ConsoleApp2/*.*" }
+   steps { dir("ConsoleApp2") {bat "dotnet restore"  } }
   }
   stage('Clean') {
-   steps {
-    dir("${PROEJCT}") {
-     bat 'dotnet clean'
-    }
-   }
+   when { changeset "**/ConsoleApp1/*.*" }
+   steps { dir("ConsoleApp1") {bat "dotnet clean"  } }
+   when { changeset "**/ConsoleApp2/*.*" }
+   steps { dir("ConsoleApp2") {bat "dotnet clean"  } }
   }
   stage('Build') {
-   steps {
-     dir("${PROEJCT}") {
-      bat 'dotnet build --configuration Release'
-     }
+   when { changeset "**/ConsoleApp1/*.*" }
+   steps { dir("ConsoleApp1") {bat "dotnet build --configuration Release"  } }
+   when { changeset "**/ConsoleApp2/*.*" }
+   steps { dir("ConsoleApp2") {bat "dotnet build --configuration Release"  } }   
    }
   }
  }
