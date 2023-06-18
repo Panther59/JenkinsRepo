@@ -45,11 +45,11 @@ pipeline {
           stage('Build') {
             
             steps {
-              options {
-                    lock( label: 'synchronous-build' )
+               lock( label: 'synchronous-build' )
+              {
+                dir("$project") {
+                  bat "dotnet build --configuration Release"
                 }
-              dir("$project") {
-                bat "dotnet build --configuration Release"
               }
             }
           }
