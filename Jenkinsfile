@@ -1,7 +1,7 @@
 pipeline {
  agent any
  parameters { 
-       choice(name: 'SELECTION', choices: ['one', 'two', 'three'], description: '') 
+       choice(name: 'PROEJCT', choices: ['ConsoleApp1', 'ConsoleApp2'], description: 'Select project to build') 
  }
  environment {
   dotnet = 'C:\\Program Files\\dotnet\\dotnet.exe'
@@ -10,22 +10,22 @@ pipeline {
   stage('Checkout') {
    steps {
    echo "Selection was ${SELECTION}"
-    git url: 'https://github.com/Panther59/MammothAPI.git', branch: 'master'
+    git url: 'https://github.com/Panther59/MonoRepoTrial.git', branch: 'master'
    }
   }
   stage('Restore PACKAGES') {
    steps {
-    bat "dotnet restore"
+    cd "../${PROEJCT}";bat "dotnet restore"
    }
   }
   stage('Clean') {
    steps {
-    bat 'dotnet clean'
+    cd "../${PROEJCT}";bat 'dotnet clean'
    }
   }
   stage('Build') {
    steps {
-    bat 'dotnet build --configuration Release'
+    cd "../${PROEJCT}";bat 'dotnet build --configuration Release'
    }
   }
  }
