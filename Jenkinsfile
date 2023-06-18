@@ -21,7 +21,7 @@ pipeline {
           }
         }
         when {
-          changeset pattern: "$service/*"
+          changeset pattern: "*/$service/*"
         }
         stages {
           stage('Restore PACKAGES') {
