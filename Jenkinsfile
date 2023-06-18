@@ -10,7 +10,7 @@ pipeline {
   stage('Checkout') {
    steps {
    echo "Selection was ${PROEJCT}"
-    git url: 'https://github.com/Panther59/MonoRepoTrial.git', branch: 'master'
+    git url: 'https://github.com/Panther59/MonoRepoTrial.git', branch: 'main'
    }
   }
   stage('Restore PACKAGES') {
