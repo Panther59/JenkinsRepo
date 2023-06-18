@@ -21,7 +21,10 @@ pipeline {
           }
         }
         when {
-          changeset pattern: "$project/**"
+          anyOf {
+                    changeset pattern: "$project/**"
+                    changeset pattern: "SharedClassLib/**"
+                }          
         }
         stages {
           stage('Restore PACKAGES') {
