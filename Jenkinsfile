@@ -2,7 +2,9 @@ pipeline {
  agent { label 'buildagent' }
  environment {
   dotnet = 'C:\\Program Files\\dotnet\\dotnet.exe'
- }
+  projects = ['ConsoleApp1', 'ConsoleApp2']
+ }                    
+ 
  stages {
   stage('Checkout') {
    steps {
@@ -11,22 +13,21 @@ pipeline {
    }
   }
   stage('Restore PACKAGES') {
-   when { changeset "**/ConsoleApp1/*.*" }
-   steps { dir("ConsoleApp1") {bat "dotnet restore"  } }
-   when { changeset "**/ConsoleApp2/*.*" }
-   steps { dir("ConsoleApp2") {bat "dotnet restore"  } }
+   script {
+    for(String proj: x) { 
+     println proj 
+     when { changeset "**/ConsoleApp1/*.*" }
+     steps { dir("ConsoleApp1") {bat "dotnet restore"  } }   
+    }
+   }   
   }
   stage('Clean') {
    when { changeset "**/ConsoleApp1/*.*" }
-   steps { dir("ConsoleApp1") {bat "dotnet clean"  } }
-   when { changeset "**/ConsoleApp2/*.*" }
-   steps { dir("ConsoleApp2") {bat "dotnet clean"  } }
+   steps { dir("ConsoleApp1") {bat "dotnet clean"  } }   
   }
   stage('Build') {
    when { changeset "**/ConsoleApp1/*.*" }
    steps { dir("ConsoleApp1") {bat "dotnet build --configuration Release"  } }
-   when { changeset "**/ConsoleApp2/*.*" }
-   steps { dir("ConsoleApp2") {bat "dotnet build --configuration Release"  } }      
   }
  }
 }
