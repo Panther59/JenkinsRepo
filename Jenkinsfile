@@ -26,8 +26,7 @@ pipeline {
    when { changeset "**/ConsoleApp1/*.*" }
    steps { dir("ConsoleApp1") {bat "dotnet build --configuration Release"  } }
    when { changeset "**/ConsoleApp2/*.*" }
-   steps { dir("ConsoleApp2") {bat "dotnet build --configuration Release"  } }   
-   }
+   steps { dir("ConsoleApp2") {bat "dotnet build --configuration Release"  } }      
   }
  }
 }
