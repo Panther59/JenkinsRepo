@@ -44,7 +44,7 @@ pipeline {
           }
           stage('Build') {
             options {
-                    lock( 'synchronous-build' )
+                    lock( label: 'synchronous-build' )
                 }
             steps {
               dir("$project") {
