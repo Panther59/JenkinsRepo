@@ -4,7 +4,6 @@ pipeline {
   }
   environment {
     dotnet = 'C:\\Program Files\\dotnet\\dotnet.exe'
-    projects = ['ConsoleApp1', 'ConsoleApp2']
   }
 
   stages {
