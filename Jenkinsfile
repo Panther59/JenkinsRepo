@@ -22,12 +22,16 @@ pipeline {
   }
   stage('Clean') {
    steps {
-    cd "../${PROEJCT}";bat 'dotnet clean'
+    dir("${PROEJCT}") {
+     bat 'dotnet clean'
+    }
    }
   }
   stage('Build') {
    steps {
-    cd "../${PROEJCT}";bat 'dotnet build --configuration Release'
+     dir("${PROEJCT}") {
+      bat 'dotnet build --configuration Release'
+     }
    }
   }
  }
