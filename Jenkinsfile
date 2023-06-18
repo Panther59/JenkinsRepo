@@ -4,7 +4,7 @@ pipeline {
        choice(name: 'SELECTION', choices: ['one', 'two', 'three'], description: '') 
  }
  environment {
-  dotnet = 'C:\Program Files\dotnet\dotnet.exe'
+  dotnet = 'C:\\Program Files\\dotnet\\dotnet.exe'
  }
  stages {
   stage('Checkout') {
