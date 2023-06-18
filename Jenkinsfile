@@ -1,5 +1,5 @@
 pipeline {
- agent any
+ agent buildagent
  parameters { 
        choice(name: 'PROEJCT', choices: ['ConsoleApp1', 'ConsoleApp2'], description: 'Select project to build') 
  }
