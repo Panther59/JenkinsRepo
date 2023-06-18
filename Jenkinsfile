@@ -15,7 +15,9 @@ pipeline {
   }
   stage('Restore PACKAGES') {
    steps {
-    cd "../${PROEJCT}";bat "dotnet restore"
+    dir("${PROEJCT}") {
+     bat "dotnet restore"
+    }
    }
   }
   stage('Clean') {
